@@ -17,8 +17,9 @@
 ## How To Use :
 ```
 $uploadedFileName = 'userfile'; // file name in upload form
+$type = 'image'; // set upload type : image,doc,pdf,excel
 $directory = 'avatar'; // set directory upload
-$s3Upload = json_encode(s3Upload($uploadedFileName, $directory));
+$s3Upload = json_encode(s3Upload($type, $uploadedFileName, $directory));
 
 $res = json_decode($s3Upload); // convert to object
 print_r($res);
