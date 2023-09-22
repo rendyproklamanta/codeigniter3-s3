@@ -16,11 +16,15 @@ class Upload extends CI_Controller
       $this->load->view('upload');
    }
 
+   /**
+    * doUpload
+    */
    function doUpload()
    {
       $uploadedFileName = 'userfile'; // file name in upload form
+      $type = 'image'; // set directory upload
       $directory = 'avatar'; // set directory upload
-      $s3Upload = json_encode(s3Upload($uploadedFileName, $directory));
+      $s3Upload = json_encode(s3Upload($type, $uploadedFileName, $directory));
       $res = json_decode($s3Upload); // convert to object
 
       if ($res->success) {

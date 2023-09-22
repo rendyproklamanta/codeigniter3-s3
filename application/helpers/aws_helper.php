@@ -5,10 +5,26 @@ require_once APPPATH . 'libraries/aws/aws-autoloader.php';
 
 use Aws\S3\S3Client;
 
-function s3Upload($uploadedFileName, $directory)
+/**
+ * Function to upload file using S3 compatible API
+ * @param string $type (image, doc, pdf, excel)
+ * @param string $uploadedFileName
+ * @param string $directory
+ * @return array
+ */
+function s3Upload($type, $uploadedFileName, $directory)
 {
    $CI = &get_instance();
    $CI->config->load('aws'); // load the configuration file
+
+   if (empty($type)) {
+      $res = [
+         'success' => false,
+         'message' => 'Please assign type file!'
+      ];
+      return $res;
+      exit();
+   }
 
    if (empty($_FILES[$uploadedFileName]["name"])) {
       $res = [
@@ -25,12 +41,27 @@ function s3Upload($uploadedFileName, $directory)
    $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
 
    // Allow certain file formats 
-   $allowTypes = array('pdf', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'png', 'jpeg', 'gif', 'webp');
+   if ($type == 'image') {
+      $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'webp');
+   } else if ($type == 'doc') {
+      $allowTypes = array('doc', 'docx');
+   } else if ($type == 'pdf') {
+      $allowTypes = array('pdf');
+   } else if ($type == 'excel') {
+      $allowTypes = array('xls', 'xlsx');
+   } else {
+      $res = [
+         'success' => false,
+         'message' => 'File type "' . $type . '" not found!'
+      ];
+      return $res;
+      exit();
+   }
 
    if (!in_array($fileExtension, $allowTypes)) {
       $res = [
          'success' => false,
-         'message' => 'Sorry, only Word/Excel/Image files are allowed to upload.'
+         'message' => 'Sorry, file type "' . $fileExtension . '" not allowed to upload.'
       ];
       return $res;
       exit();
@@ -48,24 +79,24 @@ function s3Upload($uploadedFileName, $directory)
       exit();
    }
 
-   // Instantiate an Amazon S3 client 
-   $client = new S3Client([
-      'credentials' => array(
-         'key'    => config_item('aws_s3')['access_key'],
-         'secret' => config_item('aws_s3')['secret_key'],
-      ),
-      'endpoint' => config_item('aws_s3')['endpoint'],
-      'region' => config_item('aws_s3')['region'],
-      'version' => 'latest',
-   ]);
-
-   $keyName = $directory . '/' . uniqid() . '.' . $fileExtension;
-
-   // Upload file to S3 bucket 
    try {
+      // Instantiate an Amazon S3 client 
+      $client = new S3Client([
+         'credentials' => array(
+            'key'    => config_item('aws_s3')['access_key'],
+            'secret' => config_item('aws_s3')['secret_key'],
+         ),
+         'endpoint' => config_item('aws_s3')['endpoint'],
+         'region' => config_item('aws_s3')['region'],
+         'version' => 'latest',
+      ]);
+
+      $keyName = $directory . '/' . uniqid() . '.' . $fileExtension;
+
+      // Upload file to S3 bucket 
       $putObject = $client->putObject([
          'Bucket' => config_item('aws_s3')['bucket_name'],
-         'Key'    => $keyName,
+         'Key' => $keyName,
          'SourceFile' => $fileTemp,
          'ContentType' => $fileType,
       ]);
@@ -88,8 +119,7 @@ function s3Upload($uploadedFileName, $directory)
       ];
       return $res;
       exit();
-   } catch (Aws\S3\Exception\S3Exception $e) {
-
+   } catch (Exception $e) {
       $res = [
          'success' => false,
          'message' => $e->getMessage(),
