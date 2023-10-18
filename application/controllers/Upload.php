@@ -1,12 +1,17 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+require_once APPPATH . 'libraries/qrcode/autoload.php';
+
+use Endroid\QrCode\QrCode;
+
 class Upload extends CI_Controller
 {
 
    function __construct()
    {
       parent::__construct();
+      $this->load->helper('aws_helper'); // load the helper file
    }
 
    public function index()
@@ -15,16 +20,44 @@ class Upload extends CI_Controller
    }
 
    /**
-    * doUpload
+    * upload image directly to S3
     */
    function doUpload()
    {
-      $this->load->helper('aws_helper'); // load the helper file
+      $uploadFile = 'userfile'; // file name in upload form
 
-      $uploadedFileName = 'userfile'; // file name in upload form
-      $type = 'image'; // set upload type : image,doc,pdf,excel
+      if (empty($_FILES[$uploadFile]["name"])) {
+         print_r('Please select a file to upload.');
+         exit();
+      }
+
+      $type = 'image'; // set upload type : image | doc | pdf | excel
       $directory = 'test'; // set directory upload
-      $s3Upload = json_encode(s3Upload($type, $uploadedFileName, $directory));
+      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $source = '', $fileType = '', $extension = ''));
+      $res = json_decode($s3Upload); // convert to object
+
+      if ($res->success) {
+         // print_r($res->data); // will return URL -> and then save the URL to database
+         print_r($res);
+      } else {
+         print_r($res->message);
+      }
+   }
+
+   /**
+    * generate Qr code directly to S3
+    */
+   function generateQr()
+   {
+      $qrCode = new QrCode('https://example.com');
+      $source = $qrCode->writeString(); // Generate the QR code in memory
+
+      $type = 'image'; // set upload type : image | doc | pdf | excel
+      $extension = 'png'; // set extension : jpeg | png | doc
+      $fileType = 'image/png'; // complete file type : image/jpeg | application/msword | application/pdf | application/vnd.ms-excel
+      $directory = 'qr'; // set directory upload
+      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile = '', $source, $fileType, $extension));
+
       $res = json_decode($s3Upload); // convert to object
 
       if ($res->success) {
