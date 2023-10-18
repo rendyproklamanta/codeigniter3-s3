@@ -11,13 +11,13 @@ use Aws\S3\S3Client;
  * @param mixed $uploadFile (from upload form)
  * @param mixed $directory
  * @param mixed $source (from generated image like qr, etc.)
- * @param mixed $fileType is required if using source
- * @param mixed $fileExtension is required if using source
+ * @param mixed $mimeType is required if using source
+ * @param mixed $extension is required if using source
  * @param upload : s3Upload($type, $directory, $uploadFile)
- * @param generated : s3Upload($type, $directory, 0, $source, $fileType, $extension)
+ * @param generated : s3Upload($type, $directory, 0, $source, $mimeType, $extension)
  * @return array
  */
-function s3Upload($type, $directory = '', $uploadFile = '', $source = '', $fileType = '', $fileExtension = '')
+function s3Upload($type, $directory = '', $uploadFile = '', $source = '', $mimeType = '', $extension = '')
 {
    $CI = &get_instance();
    $CI->config->load('aws'); // load the configuration file
@@ -33,10 +33,10 @@ function s3Upload($type, $directory = '', $uploadFile = '', $source = '', $fileT
 
    // File from generated image 
    if ($source) {
-      if (empty($fileExtension) || empty($fileType)) {
+      if (empty($extension) || empty($mimeType)) {
          $res = [
             'success' => false,
-            'message' => 'Please assign file type and extension!'
+            'message' => 'Please assign mime type and extension!'
          ];
          return $res;
          exit();
@@ -47,11 +47,21 @@ function s3Upload($type, $directory = '', $uploadFile = '', $source = '', $fileT
    }
 
    // File from upload 
-   $fileTemp = '';
    if ($uploadFile) {
+      // # Create directory
+      // $relativePath = 'assets/upload/' . $directory;
+      // $fullPath = FCPATH . $relativePath;
+
+      // if (!is_dir($fullPath)) {
+      //    if (mkdir($fullPath, 0755, true)) {
+      //    } else {
+      //       echo 'Directory ' . $fullPath . ' failed to created.';
+      //    }
+      // }
+
       $fileName = basename($_FILES[$uploadFile]["name"]);
-      $fileType = $_FILES[$uploadFile]["type"];
-      $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+      $mimeType = $_FILES[$uploadFile]["type"];
+      $extension = pathinfo($fileName, PATHINFO_EXTENSION);
 
       $fileTemp = $_FILES[$uploadFile]["tmp_name"];
 
@@ -87,10 +97,10 @@ function s3Upload($type, $directory = '', $uploadFile = '', $source = '', $fileT
    }
 
    // validation file type
-   if (!in_array($fileExtension, $allowTypes)) {
+   if (!in_array($extension, $allowTypes)) {
       $res = [
          'success' => false,
-         'message' => 'Sorry, file type "' . $fileExtension . '" not allowed to upload.'
+         'message' => 'Sorry, file type "' . $extension . '" not allowed to upload.'
       ];
       return $res;
       exit();
@@ -113,14 +123,14 @@ function s3Upload($type, $directory = '', $uploadFile = '', $source = '', $fileT
          $directory = $directory . '/';
       }
 
-      $keyName = $directory . uniqid() . '.' . $fileExtension;
+      $keyName = $directory . uniqid() . '.' . $extension;
 
       // Upload file to S3 bucket 
       $putObject = $client->putObject([
          'Bucket' => config_item('aws_s3')['bucket_name'],
          'Key' => $keyName,
          'Body' => $fileContent,
-         'ContentType' => $fileType,
+         'ContentType' => $mimeType,
       ]);
 
       $result = $putObject->toArray();

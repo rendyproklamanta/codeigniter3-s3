@@ -33,7 +33,7 @@ class Upload extends CI_Controller
 
       $type = 'image'; // set upload type : image | doc | pdf | excel
       $directory = 'test'; // set directory upload
-      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $source = '', $fileType = '', $extension = ''));
+      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile));
       $res = json_decode($s3Upload); // convert to object
 
       if ($res->success) {
@@ -54,10 +54,10 @@ class Upload extends CI_Controller
 
       $type = 'image'; // set upload type : image | doc | pdf | excel
       $extension = 'png'; // set extension : jpeg | png | doc
-      $fileType = 'image/png'; // complete file type : image/jpeg | application/msword | application/pdf | application/vnd.ms-excel
+      $mimeType = 'image/png'; // mime type : image/jpeg | application/msword | application/pdf | application/vnd.ms-excel
       $directory = 'qr'; // set directory upload
-      $uploadFile = ''; // set empty
-      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $source, $fileType, $extension));
+      $uploadFile = ''; // set to empty
+      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $source, $mimeType, $extension));
 
       $res = json_decode($s3Upload); // convert to object
 
