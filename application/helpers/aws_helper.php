@@ -42,6 +42,7 @@ function s3Upload($type, $directory = '', $uploadFile = '', $source = '', $fileT
          exit();
       }
 
+      $uploadFile = '';
       $fileContent = $source;
    }
 
@@ -63,6 +64,7 @@ function s3Upload($type, $directory = '', $uploadFile = '', $source = '', $fileT
          exit();
       }
 
+      $source = '';
       $fileContent = file_get_contents($fileTemp);
    }
 

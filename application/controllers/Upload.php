@@ -56,7 +56,8 @@ class Upload extends CI_Controller
       $extension = 'png'; // set extension : jpeg | png | doc
       $fileType = 'image/png'; // complete file type : image/jpeg | application/msword | application/pdf | application/vnd.ms-excel
       $directory = 'qr'; // set directory upload
-      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile = '', $source, $fileType, $extension));
+      $uploadFile = 'ccc';
+      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $source, $fileType, $extension));
 
       $res = json_decode($s3Upload); // convert to object
 
