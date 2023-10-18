@@ -7,8 +7,6 @@ class Upload extends CI_Controller
    function __construct()
    {
       parent::__construct();
-      $this->config->load('aws'); // load the configuration file
-      $this->load->helper('aws_helper'); // load the helper file
    }
 
    public function index()
@@ -21,9 +19,11 @@ class Upload extends CI_Controller
     */
    function doUpload()
    {
+      $this->load->helper('aws_helper'); // load the helper file
+
       $uploadedFileName = 'userfile'; // file name in upload form
       $type = 'image'; // set upload type : image,doc,pdf,excel
-      $directory = 'avatar'; // set directory upload
+      $directory = 'test'; // set directory upload
       $s3Upload = json_encode(s3Upload($type, $uploadedFileName, $directory));
       $res = json_decode($s3Upload); // convert to object
 

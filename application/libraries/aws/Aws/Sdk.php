@@ -32,8 +32,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionAppConfig(array $args = [])
  * @method \Aws\AppConfigData\AppConfigDataClient createAppConfigData(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionAppConfigData(array $args = [])
- * @method \Aws\AppFabric\AppFabricClient createAppFabric(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionAppFabric(array $args = [])
  * @method \Aws\AppIntegrationsService\AppIntegrationsServiceClient createAppIntegrationsService(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionAppIntegrationsService(array $args = [])
  * @method \Aws\AppMesh\AppMeshClient createAppMesh(array $args = [])
@@ -140,8 +138,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionCodeGuruProfiler(array $args = [])
  * @method \Aws\CodeGuruReviewer\CodeGuruReviewerClient createCodeGuruReviewer(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionCodeGuruReviewer(array $args = [])
- * @method \Aws\CodeGuruSecurity\CodeGuruSecurityClient createCodeGuruSecurity(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionCodeGuruSecurity(array $args = [])
  * @method \Aws\CodePipeline\CodePipelineClient createCodePipeline(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionCodePipeline(array $args = [])
  * @method \Aws\CodeStar\CodeStarClient createCodeStar(array $args = [])
@@ -250,8 +246,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionElasticsearchService(array $args = [])
  * @method \Aws\Emr\EmrClient createEmr(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionEmr(array $args = [])
- * @method \Aws\EntityResolution\EntityResolutionClient createEntityResolution(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionEntityResolution(array $args = [])
  * @method \Aws\EventBridge\EventBridgeClient createEventBridge(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionEventBridge(array $args = [])
  * @method \Aws\FIS\FISClient createFIS(array $args = [])
@@ -298,8 +292,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionHoneycode(array $args = [])
  * @method \Aws\IVS\IVSClient createIVS(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionIVS(array $args = [])
- * @method \Aws\IVSRealTime\IVSRealTimeClient createIVSRealTime(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionIVSRealTime(array $args = [])
  * @method \Aws\Iam\IamClient createIam(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionIam(array $args = [])
  * @method \Aws\IdentityStore\IdentityStoreClient createIdentityStore(array $args = [])
@@ -310,8 +302,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionInspector(array $args = [])
  * @method \Aws\Inspector2\Inspector2Client createInspector2(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionInspector2(array $args = [])
- * @method \Aws\InternetMonitor\InternetMonitorClient createInternetMonitor(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionInternetMonitor(array $args = [])
  * @method \Aws\IoT1ClickDevicesService\IoT1ClickDevicesServiceClient createIoT1ClickDevicesService(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionIoT1ClickDevicesService(array $args = [])
  * @method \Aws\IoT1ClickProjects\IoT1ClickProjectsClient createIoT1ClickProjects(array $args = [])
@@ -416,8 +406,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionMainframeModernization(array $args = [])
  * @method \Aws\ManagedBlockchain\ManagedBlockchainClient createManagedBlockchain(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionManagedBlockchain(array $args = [])
- * @method \Aws\ManagedBlockchainQuery\ManagedBlockchainQueryClient createManagedBlockchainQuery(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionManagedBlockchainQuery(array $args = [])
  * @method \Aws\ManagedGrafana\ManagedGrafanaClient createManagedGrafana(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionManagedGrafana(array $args = [])
  * @method \Aws\MarketplaceCatalog\MarketplaceCatalogClient createMarketplaceCatalog(array $args = [])
@@ -436,8 +424,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionMediaLive(array $args = [])
  * @method \Aws\MediaPackage\MediaPackageClient createMediaPackage(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionMediaPackage(array $args = [])
- * @method \Aws\MediaPackageV2\MediaPackageV2Client createMediaPackageV2(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionMediaPackageV2(array $args = [])
  * @method \Aws\MediaPackageVod\MediaPackageVodClient createMediaPackageVod(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionMediaPackageVod(array $args = [])
  * @method \Aws\MediaStore\MediaStoreClient createMediaStore(array $args = [])
@@ -446,8 +432,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionMediaStoreData(array $args = [])
  * @method \Aws\MediaTailor\MediaTailorClient createMediaTailor(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionMediaTailor(array $args = [])
- * @method \Aws\MedicalImaging\MedicalImagingClient createMedicalImaging(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionMedicalImaging(array $args = [])
  * @method \Aws\MemoryDB\MemoryDBClient createMemoryDB(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionMemoryDB(array $args = [])
  * @method \Aws\MigrationHub\MigrationHubClient createMigrationHub(array $args = [])
@@ -464,8 +448,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionMobile(array $args = [])
  * @method \Aws\Neptune\NeptuneClient createNeptune(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionNeptune(array $args = [])
- * @method \Aws\Neptunedata\NeptunedataClient createNeptunedata(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionNeptunedata(array $args = [])
  * @method \Aws\NetworkFirewall\NetworkFirewallClient createNetworkFirewall(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionNetworkFirewall(array $args = [])
  * @method \Aws\NetworkManager\NetworkManagerClient createNetworkManager(array $args = [])
@@ -474,8 +456,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionNimbleStudio(array $args = [])
  * @method \Aws\OAM\OAMClient createOAM(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionOAM(array $args = [])
- * @method \Aws\OSIS\OSISClient createOSIS(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionOSIS(array $args = [])
  * @method \Aws\Omics\OmicsClient createOmics(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionOmics(array $args = [])
  * @method \Aws\OpenSearchServerless\OpenSearchServerlessClient createOpenSearchServerless(array $args = [])
@@ -494,12 +474,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionPI(array $args = [])
  * @method \Aws\Panorama\PanoramaClient createPanorama(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionPanorama(array $args = [])
- * @method \Aws\PaymentCryptography\PaymentCryptographyClient createPaymentCryptography(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionPaymentCryptography(array $args = [])
- * @method \Aws\PaymentCryptographyData\PaymentCryptographyDataClient createPaymentCryptographyData(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionPaymentCryptographyData(array $args = [])
- * @method \Aws\PcaConnectorAd\PcaConnectorAdClient createPcaConnectorAd(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionPcaConnectorAd(array $args = [])
  * @method \Aws\Personalize\PersonalizeClient createPersonalize(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionPersonalize(array $args = [])
  * @method \Aws\PersonalizeEvents\PersonalizeEventsClient createPersonalizeEvents(array $args = [])
@@ -662,18 +636,12 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionTimestreamQuery(array $args = [])
  * @method \Aws\TimestreamWrite\TimestreamWriteClient createTimestreamWrite(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionTimestreamWrite(array $args = [])
- * @method \Aws\Tnb\TnbClient createTnb(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionTnb(array $args = [])
  * @method \Aws\TranscribeService\TranscribeServiceClient createTranscribeService(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionTranscribeService(array $args = [])
  * @method \Aws\Transfer\TransferClient createTransfer(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionTransfer(array $args = [])
  * @method \Aws\Translate\TranslateClient createTranslate(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionTranslate(array $args = [])
- * @method \Aws\VPCLattice\VPCLatticeClient createVPCLattice(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionVPCLattice(array $args = [])
- * @method \Aws\VerifiedPermissions\VerifiedPermissionsClient createVerifiedPermissions(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionVerifiedPermissions(array $args = [])
  * @method \Aws\VoiceID\VoiceIDClient createVoiceID(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionVoiceID(array $args = [])
  * @method \Aws\WAFV2\WAFV2Client createWAFV2(array $args = [])
@@ -715,7 +683,7 @@ namespace Aws;
  */
 class Sdk
 {
-    const VERSION = '3.281.11';
+    const VERSION = '3.259.0';
 
     /** @var array Arguments for creating clients */
     private $args;
@@ -781,7 +749,7 @@ class Sdk
         $namespace = $service['namespace'];
 
         $klass = "Aws\\{$namespace}\\{$namespace}MultiRegionClient";
-        $klass = class_exists($klass) ? $klass : MultiRegionClient::class;
+        $klass = class_exists($klass) ? $klass : 'Aws\\MultiRegionClient';
 
         return new $klass($this->mergeArgs($namespace, $service, $args));
     }

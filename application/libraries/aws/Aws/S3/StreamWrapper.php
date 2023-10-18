@@ -817,7 +817,6 @@ class StreamWrapper
             return $this->triggerError("Bucket already exists: {$path}");
         }
 
-        unset($params['ACL']);
         return $this->boolCall(function () use ($params, $path) {
             $this->getClient()->createBucket($params);
             $this->clearCacheKey($path);

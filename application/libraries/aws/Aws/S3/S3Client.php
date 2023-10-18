@@ -473,17 +473,12 @@ class S3Client extends AwsClient implements S3ClientInterface
         $command = clone $command;
         $command->getHandlerList()->remove('signer');
         $request = \Aws\serialize($command);
-        $signing_name = empty($command->getAuthSchemes())
-            ? $this->getSigningName($request->getUri()->getHost())
-            : $command->getAuthSchemes()['name'];
-        $signature_version = empty($command->getAuthSchemes())
-            ? $this->getConfig('signature_version')
-            : $command->getAuthSchemes()['version'];
+        $signing_name = $this->getSigningName($request->getUri()->getHost());
 
         /** @var \Aws\Signature\SignatureInterface $signer */
         $signer = call_user_func(
             $this->getSignatureProvider(),
-            $signature_version,
+            $this->getConfig('signature_version'),
             $signing_name,
             $this->getConfig('signing_region')
         );
@@ -819,21 +814,19 @@ class S3Client extends AwsClient implements S3ClientInterface
                                     && $attempts < $config->getMaxAttempts()
                                 ) {
                                     if (!empty($result->getResponse())
-                                        && $result->getResponse()->getStatusCode() >= 400
+                                        && strpos(
+                                            $result->getResponse()->getBody(),
+                                            'Your socket connection to the server'
+                                        ) !== false
                                     ) {
-                                        return strpos(
-                                                $result->getResponse()->getBody(),
-                                                'Your socket connection to the server'
-                                            ) !== false;
+                                        $isRetryable = false;
                                     }
-
                                     if ($result->getPrevious() instanceof RequestException
                                         && $cmd->getName() !== 'CompleteMultipartUpload'
                                     ) {
                                         $isRetryable = true;
                                     }
                                 }
-
                                 return $isRetryable;
                             }
                         ]

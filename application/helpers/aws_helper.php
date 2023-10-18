@@ -12,7 +12,7 @@ use Aws\S3\S3Client;
  * @param string $directory
  * @return array
  */
-function s3Upload($type, $uploadedFileName, $directory)
+function s3Upload($type, $uploadedFileName, $directory = '')
 {
    $CI = &get_instance();
    $CI->config->load('aws'); // load the configuration file
@@ -89,9 +89,14 @@ function s3Upload($type, $uploadedFileName, $directory)
          'endpoint' => config_item('aws_s3')['endpoint'],
          'region' => config_item('aws_s3')['region'],
          'version' => 'latest',
+         'http' => ['verify' => false]
       ]);
 
-      $keyName = $directory . '/' . uniqid() . '.' . $fileExtension;
+      if ($directory) {
+         $directory = $directory . '/';
+      }
+
+      $keyName = $directory . uniqid() . '.' . $fileExtension;
 
       // Upload file to S3 bucket 
       $putObject = $client->putObject([
@@ -114,7 +119,7 @@ function s3Upload($type, $uploadedFileName, $directory)
 
       $res = [
          'success' => true,
-         'message' => 'File upload Success!',
+         'message' => 'File Upload Success!',
          'data' => $result['ObjectURL']
       ];
       return $res;

@@ -7,7 +7,6 @@
 
 <body>
 
-
    <form method="post" action="/upload/doUpload" enctype="multipart/form-data">
       <div class="form-group">
          <label><b>Select File:</b></label>
