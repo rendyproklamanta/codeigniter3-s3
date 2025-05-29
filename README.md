@@ -16,7 +16,7 @@
 
 ## How To Use :
 - File from upload
-```
+```php
 $uploadFile = 'userfile'; // file name in upload form
 
 if (empty($_FILES[$uploadFile]["name"])) {
@@ -26,22 +26,28 @@ if (empty($_FILES[$uploadFile]["name"])) {
 
 $type = 'image'; // set upload type : image,doc,pdf,excel
 $directory = 'test'; // set directory upload
-$s3Upload = json_encode(s3Upload($type, $directory, $uploadFile'));
+$maxSize = 10; // in MB = 10MB
+$generatedImg = ''; // set empty
+$extension = ''; // set empty
+$mimeType = ''; // set empty
+$s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $generatedImg, $mimeType, $extension, $maxSize));
 $res = json_decode($s3Upload); // convert to object
 
 print_r($res);
 ```
 
 - File from generated image
-```
+```php
 $qrCode = new QrCode('https://example.com');
-$source = $qrCode->writeString(); // Generate the QR code in memory
+$generatedImg = $qrCode->writeString(); // Generate the QR code in memory
 
 $type = 'image'; // set upload type : image | doc | pdf | excel
 $extension = 'png'; // set extension : jpeg | png | doc
 $mimeType = 'image/png'; // complete file type : image/jpeg | application/msword | application/pdf | application/vnd.ms-excel
 $directory = 'qr'; // set directory upload
-$s3Upload = json_encode(s3Upload($type, $directory, $uploadFile = '', $source, $mimeType, $extension));
+$uploadFile = ''; // set empty
+$maxSize = ''; //set empty
+$s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $generatedImg, $mimeType, $extension));
 $res = json_decode($s3Upload); // convert to object
 
 print_r($res);

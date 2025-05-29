@@ -33,7 +33,11 @@ class Upload extends CI_Controller
 
       $type = 'image'; // set upload type : image | doc | pdf | excel
       $directory = 'test'; // set directory upload
-      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile));
+      $maxSize = 2; // in MB = 10MB
+      $generatedImg = ''; // set empty
+      $extension = ''; // set empty
+      $mimeType = ''; // set empty
+      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $generatedImg, $mimeType, $extension, $maxSize));
       $res = json_decode($s3Upload); // convert to object
 
       if ($res->success) {
@@ -50,15 +54,15 @@ class Upload extends CI_Controller
    function generateQr()
    {
       $qrCode = new QrCode('https://example.com');
-      $source = $qrCode->writeString(); // Generate the QR code in memory
+      $generatedImg = $qrCode->writeString(); // Generate the QR code in memory
 
       $type = 'image'; // set upload type : image | doc | pdf | excel
       $extension = 'png'; // set extension : jpeg | png | doc
       $mimeType = 'image/png'; // mime type : image/jpeg | application/msword | application/pdf | application/vnd.ms-excel
       $directory = 'qr'; // set directory upload
       $uploadFile = ''; // set to empty
-      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $source, $mimeType, $extension));
-
+      $maxSize = ''; //set empty
+      $s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $generatedImg, $mimeType, $extension, $maxSize));
       $res = json_decode($s3Upload); // convert to object
 
       if ($res->success) {
