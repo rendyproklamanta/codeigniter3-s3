@@ -47,7 +47,7 @@ $mimeType = 'image/png'; // complete file type : image/jpeg | application/msword
 $directory = 'qr'; // set directory upload
 $uploadFile = ''; // set empty
 $maxSize = ''; //set empty
-$s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $generatedImg, $mimeType, $extension));
+$s3Upload = json_encode(s3Upload($type, $directory, $uploadFile, $generatedImg, $mimeType, $extension, $maxSize));
 $res = json_decode($s3Upload); // convert to object
 
 print_r($res);
